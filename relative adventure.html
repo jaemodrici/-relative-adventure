@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Relative Adventure</title>
+    <style>
+        body {
+            font-family: 'Verdana', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #4caf50;
+            color: white;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: white;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #333;
+        }
+        .map {
+            text-align: center;
+        }
+        .map img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        ul li {
+            margin: 8px 0;
+        }
+        .badge {
+            color: #ff9800;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+        }
+        .highlight {
+            color: white;
+            font-weight: bold;
+        }
+        .leaderboard {
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .leaderboard table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .leaderboard th, .leaderboard td {
+            padding: 10px;
+            text-align: center;
+        }
+        .leaderboard th {
+            background: #4caf50;
+            color: white;
+        }
+        .leaderboard tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .quest-card {
+            margin: 10px;
+            padding: 15px;
+            background-color: #fbe9e7;
+            border: 1px solid #ffab91;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .quest-card:hover {
+            background-color: #ffccbc;
+        }
+        .quest-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .input-container {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Relative Adventure</h1>
+        <p>Learn <span class="highlight">relative pronouns</span> while completing quests and saving the kingdom!</p>
+    </header>
+    
+    <section>
+        <h2>1. Learning Goals</h2>
+        <ul>
+            <li>Understand the correct use of relative pronouns: <strong>who, which, that, whose</strong>.</li>
+            <li>Write sentences and short stories using relative pronouns.</li>
+            <li>Collaborate and develop creativity through team activities.</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h2>2. Storyline</h2>
+        <p>The Golden Words are lost in the kingdom. As members of the Wordsmith's Guild, your mission is to find these words and restore peace to the land.</p>
+        <div class="map">
+            <h3>Adventure Map</h3>
+            <img src="adventure_map_corrected.png" alt="Adventure Map">
+        </div>
+    </section>
+    
+    <section>
+        <h2>3. Leaderboard</h2>
+        <div class="leaderboard">
+            <h3>Team Rankings</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Team Name</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <tr>
+                        <td>1</td>
+                        <td>Team A</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Team B</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Team C</td>
+                        <td>10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <section>
+        <h2>4. Quest Interaction</h2>
+        <div class="quest-container">
+            <div class="quest-card" onclick="showInput('Write a sentence about a hero who helps people.', ['who'])">
+                Easy: Write a sentence about a hero <strong>who</strong> helps people.
+            </div>
+            <div class="quest-card" onclick="showInput('Combine these sentences: This is a dog. It likes to play. (Hint: which)', ['which'])">
+                Medium: Combine these sentences: <br>"This is a dog. It likes to play." (Hint: <strong>which</strong>)
+            </div>
+            <div class="quest-card" onclick="showInput('Write a short story about a person whose idea changed the world.', ['whose'])">
+                Hard: Write a short story about a person <strong>whose</strong> idea changed the world.
+            </div>
+        </div>
+    </section>
+    
+    <section id="inputSection" class="input-container">
+        <h3 id="questPrompt"></h3>
+        <input type="text" id="userInput" placeholder="Type your sentence here..." style="width: 100%; padding: 10px; margin: 10px 0;">
+        <button onclick="checkSentence()">Submit</button>
+        <p id="feedback" style="font-weight: bold; color: green;"></p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 The Relative Adventure. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        let requiredWords = []; // List of required words for the current quest
+
+        // Show the input container for the selected quest
+        function showInput(prompt, keywords) {
+            document.getElementById("questPrompt").innerText = prompt;
+            document.getElementById("inputSection").style.display = "block";
+            document.getElementById("userInput").value = ""; // Clear previous input
+            document.getElementById("feedback").innerText = ""; // Clear feedback
+            requiredWords = keywords; // Set the required keywords for validation
+        }
+
+        // Check if the input contains the required relative pronoun
+        function checkSentence() {
+            const userInput = document.getElementById("userInput").value.toLowerCase();
+            const feedback = document.getElementById("feedback");
+
+            // Check if all required words are present in the input
+            const isValid = requiredWords.every(word => userInput.includes(word));
+            
+            if (isValid) {
+                feedback.style.color = "green";
+                feedback.innerText = "Great! You used the correct relative pronoun.";
+            } else {
+                feedback.style.color = "red";
+                feedback.innerText = "Oops! Make sure to use the correct relative pronoun.";
+            }
+        }
+    </script>
+</body>
+</html>
